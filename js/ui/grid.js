@@ -19,7 +19,26 @@ export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSe
       const step = pattern[activeTrack][i];
       if (step.on) btn.classList.add("on");
       if (step.accent) btn.classList.add("accent");
-      btn.textContent = step.on ? step.note.replace(/\d/, "") : "·";
+
+      if (step.on) {
+        const octaveMatch = step.note.match(/(-?\d+)$/);
+        const octave = octaveMatch ? octaveMatch[1] : "";
+        const noteName = step.note.replace(/-?\d+$/, "");
+
+        btn.classList.add("step-note");
+
+        const noteEl = document.createElement("span");
+        noteEl.className = "step-note-name";
+        noteEl.textContent = noteName;
+
+        const octaveEl = document.createElement("span");
+        octaveEl.className = "step-note-octave";
+        octaveEl.textContent = octave;
+
+        btn.append(noteEl, octaveEl);
+      } else {
+        btn.textContent = "·";
+      }
     }
 
     if (playheadStep === i) btn.classList.add("playhead");
