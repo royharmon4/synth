@@ -85,8 +85,8 @@ function drawGrid() {
     pattern: state.pattern,
     activeTrack: state.activeTrack,
     playheadStep: state.playheadStep,
+    selectedStep: state.selectedStep,
     onToggleStep: (stepIndex) => {
-      state.selectedStep = stepIndex;
       toggleStep(stepIndex);
       drawStepEditor();
     },
