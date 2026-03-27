@@ -59,14 +59,16 @@ export function renderInstrumentControls({ panel, track, instrumentState, onPara
   });
 }
 
-export function renderStepEditor({ container, track, step, onStepChange }) {
+export function renderStepEditor({ container, track, step, stepIndex, onStepChange }) {
   if (!step) {
     container.innerHTML = "";
     return;
   }
 
+  const stepContextLabel = `Step ${stepIndex + 1} — ${track.toUpperCase()}`;
+
   if (track === "drums") {
-    container.innerHTML = `<h3>Step Editor (Drums)</h3><div class='segmented' id='drumStepToggles'></div><div class='small-note'>Tap voices to toggle. Accent adds punch.</div>`;
+    container.innerHTML = `<h3>Step Editor (Drums)</h3><div class='step-context-label'>${stepContextLabel}</div><div class='segmented' id='drumStepToggles'></div><div class='small-note'>Tap voices to toggle. Accent adds punch.</div>`;
     const wrap = container.querySelector("#drumStepToggles");
     DRUM_VOICES.forEach((voice) => {
       const b = document.createElement("button");
@@ -85,6 +87,7 @@ export function renderStepEditor({ container, track, step, onStepChange }) {
 
   container.innerHTML = `
     <h3>Step Editor (${track})</h3>
+    <div class='step-context-label'>${stepContextLabel}</div>
     <div class='transport-row'>
       <button id='stepOnBtn' class='${step.on ? "active" : ""}'>${step.on ? "On" : "Off"}</button>
       <label>Note</label>
