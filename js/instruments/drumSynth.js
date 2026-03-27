@@ -81,6 +81,14 @@ export function createDrumSynth(output) {
     },
     setParam(name, value) {
       if (name === "accent") state.accent = value;
+      if (name === "mute" && value && typeof value === "object") {
+        state.mute = { ...value };
+        return;
+      }
+      if (name === "solo" && value && typeof value === "object") {
+        state.solo = { ...value };
+        return;
+      }
       const [group, voice] = name.split(".");
       if (group === "volume") volumes[voice] = value;
       if (group === "decay") decays[voice] = value;
