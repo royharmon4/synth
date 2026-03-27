@@ -1,0 +1,38 @@
+:root {
+  color-scheme: dark;
+  --bg: #080c17;
+  --panel: #121a2f;
+  --panel-2: #0f1730;
+  --text: #ecf2ff;
+  --muted: #8ea3cc;
+  --accent: #35e0ff;
+  --accent-2: #ad6bff;
+  --danger: #ff5a8f;
+  --success: #57e68f;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at top, #132443 0%, var(--bg) 50%);
+  color: var(--text);
+}
+
+#app {
+  width: min(860px, 100%);
+  margin: 0 auto;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+main {
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+h1, h2, h3 { margin: 0 0 8px; font-weight: 700; }
+h1 { font-size: 1rem; }
+h2 { font-size: 0.95rem; color: var(--muted); }
+
+input, select, button { font: inherit; }

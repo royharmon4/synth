@@ -1,0 +1,12 @@
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(16, minmax(28px, 1fr)); }
+  .control-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
+  .keyboard { grid-template-columns: repeat(14, minmax(28px, 1fr)); }
+  .drum-pads { grid-template-columns: repeat(4, minmax(90px, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 0.92rem; }
+  button, .file-label, select { padding: 8px; }
+  .transport-row { gap: 6px; }
+}
