@@ -103,6 +103,7 @@ function drawStepEditor() {
     container: ui.stepEditor,
     track: state.activeTrack,
     step,
+    stepIndex: state.selectedStep,
     onStepChange(patch) {
       if (state.activeTrack === "drums") {
         if ("voice" in patch) step.hits[patch.voice] = patch.value;

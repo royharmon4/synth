@@ -43,7 +43,8 @@ export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSe
 
     if (playheadStep === i) btn.classList.add("playhead");
 
-    btn.addEventListener("click", () => onToggleStep(i));
+    btn.addEventListener("click", () => onSelectStep(i));
+    btn.addEventListener("dblclick", () => onToggleStep(i));
     btn.addEventListener("contextmenu", (e) => {
       e.preventDefault();
       onSelectStep(i);
@@ -53,4 +54,8 @@ export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSe
   }
 
   container.appendChild(grid);
+  const instructions = document.createElement("div");
+  instructions.className = "grid-instructions small-note";
+  instructions.textContent = "Click to select • Double-click to toggle on/off • Edit note in step editor below.";
+  container.appendChild(instructions);
 }

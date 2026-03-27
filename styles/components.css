@@ -129,3 +129,11 @@ input[type="file"] { display: none; }
 }
 
 .small-note { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
+
+.step-context-label {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: var(--text);
+  font-weight: 600;
+}

@@ -3,6 +3,7 @@
   .control-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
   .keyboard { grid-template-columns: repeat(14, minmax(28px, 1fr)); }
   .drum-pads { grid-template-columns: repeat(4, minmax(90px, 1fr)); }
+  .grid-instructions { display: none; }
 }
 
 @media (max-width: 420px) {
