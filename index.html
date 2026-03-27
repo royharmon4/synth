@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Neon Pocket Workstation</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/mobile.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.js"></script>
+    <script type="module" defer src="js/app.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar panel sticky">
+        <h1>Neon Pocket Workstation</h1>
+        <div class="transport-row">
+          <button id="startAudioBtn" class="accent">Tap to Start Audio</button>
+          <button id="playBtn">Play</button>
+          <button id="stopBtn">Stop</button>
+          <button id="pauseBtn">Pause</button>
+        </div>
+        <div class="transport-row">
+          <label>Tempo <span id="tempoValue">112</span></label>
+          <input id="tempo" type="range" min="70" max="160" step="1" value="112" />
+          <label>Swing <span id="swingValue">0%</span></label>
+          <input id="swing" type="range" min="0" max="60" step="1" value="0" />
+        </div>
+        <div class="transport-row compact">
+          <label>Steps</label>
+          <div id="stepLengthGroup" class="segmented" role="group" aria-label="Step length">
+            <button data-length="16" class="active">16</button>
+            <button data-length="32">32</button>
+          </div>
+          <button id="clearPatternBtn">Clear</button>
+          <button id="randomizeBtn">Randomize</button>
+          <button id="savePatternBtn">Save</button>
+          <button id="loadPatternBtn">Load</button>
+          <button id="exportPatternBtn">Export</button>
+        </div>
+        <div class="transport-row compact">
+          <label for="importPatternInput" class="file-label">Import JSON</label>
+          <input id="importPatternInput" type="file" accept="application/json" />
+          <label>Pattern</label>
+          <select id="patternSelect"></select>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel instrument-switcher">
+          <div id="instrumentTabs" class="segmented">
+            <button data-track="bass" class="active">Bass</button>
+            <button data-track="lead">Lead</button>
+            <button data-track="keys">Keys</button>
+            <button data-track="drums">Drums</button>
+          </div>
+        </section>
+
+        <section id="sequencerSection" class="panel">
+          <h2>Sequencer</h2>
+          <div id="gridContainer"></div>
+          <div id="stepEditor"></div>
+        </section>
+
+        <section id="instrumentPanel" class="panel"></section>
+
+        <section class="panel">
+          <h2>Performance</h2>
+          <div id="keyboardContainer"></div>
+          <div id="drumPadsContainer" class="drum-pads"></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

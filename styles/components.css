@@ -1,0 +1,112 @@
+.panel {
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+  border: 1px solid #22365e;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  border-radius: 0 0 14px 14px;
+}
+
+.transport-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.transport-row.compact button,
+.transport-row.compact select,
+.transport-row.compact .file-label,
+.transport-row.compact label {
+  font-size: 0.82rem;
+}
+
+button,
+.file-label,
+select {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid #38517b;
+  background: #17233d;
+  color: var(--text);
+  padding: 8px 12px;
+}
+
+button:active { transform: translateY(1px); }
+button.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+button.accent { background: #17395a; border-color: var(--accent); }
+
+input[type="range"] {
+  flex: 1;
+  min-width: 120px;
+  min-height: 44px;
+}
+
+input[type="file"] { display: none; }
+.file-label { display: inline-flex; align-items: center; cursor: pointer; }
+
+.segmented { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.segmented button { min-width: 56px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(30px, 1fr));
+  gap: 6px;
+}
+
+.step {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid #39557f;
+  background: #111b30;
+  color: #9bb0d2;
+}
+.step.on { background: #1e4d74; color: #fff; border-color: #49e0ff; }
+.step.playhead { outline: 2px solid var(--danger); }
+.step.accent { box-shadow: 0 0 0 2px var(--accent-2) inset; }
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 10px;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(38px, 1fr));
+  gap: 6px;
+}
+.key {
+  min-height: 68px;
+  border-radius: 10px;
+  border: 1px solid #49628e;
+  background: #e7f1ff;
+  color: #0e1526;
+}
+
+.drum-pads {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  gap: 8px;
+}
+.drum-pad {
+  min-height: 56px;
+  background: #2b1e42;
+  border: 1px solid #7f63b3;
+}
+
+.small-note { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
