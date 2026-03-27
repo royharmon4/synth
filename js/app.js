@@ -61,15 +61,7 @@ applyPresetToInstrument(instruments.lead, PRESETS.lead["City Nights Lead"]);
 applyPresetToInstrument(instruments.keys, PRESETS.keys["Digital Dream Keys"]);
 applyPresetToInstrument(instruments.drums, PRESETS.drums["Retro Beat Kit"]);
 
-const engine = createSequencerEngine({
-  pattern: state.pattern,
-  instruments,
-  transport: createTransport,
-  onPlayhead(step) {
-    state.playheadStep = step;
-    drawGrid();
-  },
-});
+let engine = null;
 
 function toggleStep(index) {
   if (state.activeTrack === "drums") {
@@ -162,21 +154,27 @@ function refreshPatternSelect() {
   ui.patternSelect.innerHTML = saved.map((p) => `<option>${p.name}</option>`).join("");
 }
 
-ui.playBtn.addEventListener("click", () => engine.play());
-ui.stopBtn.addEventListener("click", () => engine.stop());
-ui.pauseBtn.addEventListener("click", () => engine.pause());
+ui.playBtn.addEventListener("click", () => {
+  if (engine) engine.play();
+});
+ui.stopBtn.addEventListener("click", () => {
+  if (engine) engine.stop();
+});
+ui.pauseBtn.addEventListener("click", () => {
+  if (engine) engine.pause();
+});
 
 ui.tempo.addEventListener("input", (e) => {
   const tempo = Number(e.target.value);
   state.pattern.meta.tempo = tempo;
   ui.tempoValue.textContent = String(tempo);
-  engine.setTempo(tempo);
+  if (engine) engine.setTempo(tempo);
 });
 ui.swing.addEventListener("input", (e) => {
   const swing = Number(e.target.value);
   state.pattern.meta.swing = swing;
   ui.swingValue.textContent = `${swing}%`;
-  engine.setSwing(swing / 100);
+  if (engine) engine.setSwing(swing / 100);
 });
 
 ui.clearPatternBtn.addEventListener("click", () => {
@@ -198,7 +196,7 @@ ui.loadPatternBtn.addEventListener("click", () => {
   const loaded = loadPatternByName(ui.patternSelect.value);
   if (loaded) {
     state.pattern = loaded;
-    engine.setLength(state.pattern.meta.length || 16);
+    if (engine) engine.setLength(state.pattern.meta.length || 16);
     redrawAll();
   }
 });
@@ -217,7 +215,7 @@ ui.importPatternInput.addEventListener("change", async (e) => {
   if (!file) return;
   const text = await file.text();
   state.pattern = deserializePattern(text);
-  engine.setLength(state.pattern.meta.length || 16);
+  if (engine) engine.setLength(state.pattern.meta.length || 16);
   redrawAll();
 });
 
@@ -237,7 +235,7 @@ ui.stepLengthGroup.querySelectorAll("button[data-length]").forEach((button) => {
   button.addEventListener("click", () => {
     const length = Number(button.dataset.length);
     state.pattern.meta.length = length;
-    engine.setLength(length);
+    if (engine) engine.setLength(length);
     ui.stepLengthGroup.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
     button.classList.add("active");
     drawGrid();
@@ -245,8 +243,21 @@ ui.stepLengthGroup.querySelectorAll("button[data-length]").forEach((button) => {
 });
 
 initAudioOnce(ui.startAudioBtn, () => {
-  engine.setTempo(state.pattern.meta.tempo);
-  engine.setSwing(state.pattern.meta.swing / 100);
+  engine = createSequencerEngine({
+    pattern: state.pattern,
+    instruments,
+    transport: createTransport,
+    onPlayhead(step) {
+      state.playheadStep = step;
+      drawGrid();
+    },
+  });
+
+  if (engine) {
+    engine.setTempo(state.pattern.meta.tempo);
+    engine.setSwing(state.pattern.meta.swing / 100);
+    engine.setLength(state.pattern.meta.length || 16);
+  }
 });
 
 keepTransportVisible();
