@@ -1,33 +1,57 @@
-# synth
+# Groovebox Sequencer (React + Tone.js)
 
-A lightweight browser-based synth/sequencer app.
+A practical local-first 4-track groovebox built with **React + TypeScript + Vite + Tone.js + Tailwind CSS**.
 
-## Run locally
+## Features
 
-Because this project uses ES modules, `index.html` **cannot** be opened directly with a `file://` URL. Browsers require modules to be loaded from a local HTTP server.
+- 4 fixed tracks: **Lead**, **Bass**, **Chords**, **Drums**
+- Selected-track workflow (sound editor + playable UI + note editor always tied to active track)
+- Start Audio gate before transport playback
+- Global transport: play / pause / stop
+- Looping with adjustable bars (1-8, default 4)
+- 4/4 timeline with grid resolutions up to 1/32
+- Live playhead + live editing while transport runs
+- Piano roll for melodic tracks (create, move, resize, delete, velocity)
+- Polyphonic chord track with overlapping notes
+- Multi-lane drum grid with per-pad sound controls
+- Per-track mixer controls: mute, solo, volume, pan
+- Local persistence in `localStorage` + seeded demo pattern on first load
 
-Use any of the options below from the project root (`/workspace/synth`):
-
-### Option 1: `npx serve`
+## Setup
 
 ```bash
-npx serve .
+npm install
+npm run dev
 ```
 
-- By default, this prints a local URL (commonly `http://localhost:3000`).
-- Open that URL in your browser.
+Then open the Vite URL (usually `http://localhost:5173`).
 
-### Option 2: `python3 -m http.server`
+## Build
 
 ```bash
-python3 -m http.server 8000
+npm run build
+npm run preview
 ```
 
-- Then open: `http://localhost:8000`
+## Folder structure
 
-### Option 3: VS Code Live Server
+- `src/components` – UI components (transport, track list, editors, playable controls)
+- `src/audio` – Tone.js engine (transport, instruments, playback scheduling)
+- `src/state` – project model, default seeded data, localStorage persistence
+- `src/types` – shared TypeScript models
+- `src/utils` – grid/time helpers
 
-1. Open this folder in VS Code.
-2. Install the **Live Server** extension (if not already installed).
-3. Right-click `index.html` and choose **Open with Live Server** (or click **Go Live** in the status bar).
-4. Open the local URL shown by Live Server.
+## Architecture notes
+
+- React owns app/project state (musical + patch + UI selection).
+- Audio engine is intentionally separate and state-driven:
+  - `applyState` pushes patch/mix/transport values into Tone nodes.
+  - A single Tone transport tick (`32n`) reads current state and schedules playback events.
+- Live edit timing choice:
+  - Sequencer reads the latest note/step arrays every tick, so edits while running are reflected at the next relevant subdivision without restarting transport.
+- Persistence choice:
+  - Project state is serialized to localStorage on each update for reliable local-first behavior.
+
+## Notes
+
+This v1 favors reliability and clarity over DAW-level scope.
