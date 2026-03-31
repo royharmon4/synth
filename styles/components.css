@@ -103,17 +103,107 @@ input[type="file"] { display: none; }
   color: var(--muted);
 }
 
-.keyboard {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(38px, 1fr));
-  gap: 6px;
+.video-keyboard-shell {
+  display: block;
 }
+
+.container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 660px;
+  height: 110px;
+  white-space: nowrap;
+  margin: 10px 0;
+}
+
+.keyboard {
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
 .key {
-  min-height: 68px;
-  border-radius: 10px;
-  border: 1px solid #49628e;
-  background: #e7f1ff;
+  cursor: pointer;
+  font: 16px "Open Sans", "Lucida Grande", "Arial", sans-serif;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 34px;
+  height: 80px;
+  text-align: center;
+  box-shadow: 2px 2px darkgray;
+  display: inline-block;
+  position: relative;
+  margin-right: 3px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.key div {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
   color: #0e1526;
+}
+
+.key div sub {
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.key:hover {
+  background-color: #eeeeff;
+}
+
+.key:active,
+.key.active {
+  background-color: black;
+  color: white;
+}
+
+.key:active div,
+.key.active div {
+  color: white;
+}
+
+.octave {
+  display: inline-block;
+  padding-right: 6px;
+}
+
+.settingsBar {
+  padding-top: 8px;
+  font: 14px "Open Sans", "Lucida Grande", "Arial", sans-serif;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+  max-width: 660px;
+  min-height: 44px;
+}
+
+.left {
+  width: 50%;
+  position: absolute;
+  left: 0;
+}
+
+.left span,
+.left input {
+  vertical-align: middle;
+}
+
+.right {
+  width: 50%;
+  position: absolute;
+  right: 0;
+  text-align: right;
+}
+
+.right span,
+.right select {
+  vertical-align: middle;
 }
 
 .drum-pads {
