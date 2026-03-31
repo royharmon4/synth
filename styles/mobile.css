@@ -1,9 +1,24 @@
 @media (min-width: 700px) {
   .grid { grid-template-columns: repeat(16, minmax(28px, 1fr)); }
   .control-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
-  .keyboard { grid-template-columns: repeat(14, minmax(28px, 1fr)); }
   .drum-pads { grid-template-columns: repeat(4, minmax(90px, 1fr)); }
   .grid-instructions { display: none; }
+}
+
+@media (max-width: 520px) {
+  .settingsBar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: auto;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    position: static;
+    text-align: left;
+  }
 }
 
 @media (max-width: 420px) {
