@@ -1,6 +1,6 @@
 import { DRUM_VOICES } from "../sequencer/patternState.js";
 
-export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSelectStep, playheadStep }) {
+export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSelectStep, playheadStep, selectedStep }) {
   container.innerHTML = "";
   const grid = document.createElement("div");
   grid.className = "grid";
@@ -42,6 +42,7 @@ export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSe
     }
 
     if (playheadStep === i) btn.classList.add("playhead");
+    if (selectedStep === i) btn.classList.add("selected");
 
     btn.addEventListener("click", () => onSelectStep(i));
     btn.addEventListener("dblclick", () => onToggleStep(i));
@@ -49,7 +50,6 @@ export function renderGrid({ container, pattern, activeTrack, onToggleStep, onSe
       e.preventDefault();
       onSelectStep(i);
     });
-    btn.addEventListener("touchstart", () => onSelectStep(i), { passive: true });
     grid.appendChild(btn);
   }
 

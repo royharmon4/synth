@@ -67,6 +67,7 @@ input[type="file"] { display: none; }
   background: #111b30;
   color: #9bb0d2;
 }
+.step.selected { border-color: #ffffff; }
 .step.on { background: #1e4d74; color: #fff; border-color: #49e0ff; }
 .step.playhead { outline: 2px solid var(--danger); }
 .step.accent { box-shadow: 0 0 0 2px var(--accent-2) inset; }
